@@ -3,7 +3,8 @@
 A lightweight and efficient AI-powered web application built with Streamlit that automatically summarizes long news articles.
 Powered by the DistilBART CNN model from Hugging Face, the app lets you paste any article, choose summary length, and instantly generate a concise summary — with automatic input language validation.
 
-🚀 Features
+
+# 🚀 Features
 🔹 AI Text Summarization
 
 Uses the pretrained model sshleifer/distilbart-cnn-12-6, optimized for abstractive news summarization.
@@ -48,20 +49,21 @@ Model loaded once using Streamlit caching
 
 Inference optimized with torch.no_grad()
 
-🛠️ Tech Stack
+# 🛠️ Tech Stack
 Component	Technology
 Framework	Streamlit
 NLP Model	DistilBART (Hugging Face)
 Language	Python
 Backend	PyTorch
 Utility	langdetect
-📁 Project Structure
+
+# 📁 Project Structure
 NewsSummarizerApp/
 ├── news_summarizer_app.py
 ├── requirements.txt
 └── .gitignore
 
-📦 Installation & Setup
+# 📦 Installation & Setup
 1️⃣ Clone the repository
 git clone https://github.com/kraryan1946/news-summarizer.git
 cd news-summarizer
@@ -77,44 +79,31 @@ pip install -r requirements.txt
 4️⃣ Run the app
 streamlit run news_summarizer_app.py
 
-🧠 Model Information
+# 🧠 Model Information
 
 DistilBART CNN-12-6
-
 Distilled version of BART
-
 Faster inference with minimal quality loss
-
 Designed for news summarization tasks
 
-🔗 Model page:
+# 🔗 Model page:
 https://huggingface.co/sshleifer/distilbart-cnn-12-6
 
-🖼️ How It Works
+# 🖼️ How It Works
+🔹Paste a news article
+🔹App detects input language
+🔹Select summary length
+🔹Click Generate Summary
+🔹Copy or download the result
 
-Paste a news article
+# ✨ Future Improvements
+🔹URL and PDF-based article input
+🔹Bullet-point summaries
+🔹Dark mode support
+🔹Auto-translation for non-English input
+🔹Deployment to Streamlit Cloud / Hugging Face Spaces
 
-App detects input language
-
-Select summary length
-
-Click Generate Summary
-
-Copy or download the result
-
-✨ Future Improvements
-
-URL and PDF-based article input
-
-Bullet-point summaries
-
-Dark mode support
-
-Auto-translation for non-English input
-
-Deployment to Streamlit Cloud / Hugging Face Spaces
-
-👤 Author
+# 👤 Author
 
 Kumar Aryan
 GitHub: https://github.com/witharyank
