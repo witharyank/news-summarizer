@@ -1,108 +1,120 @@
-# 📰 News Summarizer App
+📰 News Summarizer App
 
-A lightweight and efficient AI-powered web application built with Streamlit that automatically summarizes long news articles.  
-Powered by the DistilBART CNN model from Hugging Face, the app lets you paste any article, choose summary length, and instantly generate a concise summary.
+A lightweight and efficient AI-powered web application built with Streamlit that automatically summarizes long news articles.
+Powered by the DistilBART CNN model from Hugging Face, the app lets you paste any article, choose summary length, and instantly generate a concise summary — with automatic input language validation.
 
----
+🚀 Features
+🔹 AI Text Summarization
 
-## 🚀 Features
+Uses the pretrained model sshleifer/distilbart-cnn-12-6, optimized for abstractive news summarization.
 
-### 🔹 AI Text Summarization
-Uses the model **sshleifer/distilbart-cnn-12-6**, optimized for summarizing news articles.
+🔹 Automatic Language Detection (NEW ✅)
 
-### 🔹 Customizable Summary Length
+Detects the input language using langdetect
+
+Warns users if the article is not in English
+
+Prevents low-quality summaries from unsupported languages
+
+⚠️ Best results are achieved with English articles.
+
+🔹 Customizable Summary Length
+
 Choose the summary style:
-- Short  
-- Medium  
-- Long  
 
-### 🔹 Reading Time Estimation
-Calculates how long the original article takes to read.
+Short
 
-### 🔹 Copy or Download Summary
-- Download as `.txt`  
-- Copy summary to clipboard  
-- Displayed in a clean text block  
+Medium
 
-### 🔹 Fast Performance
-Streamlit’s caching ensures the model loads only once.
+Long
 
----
+🔹 Reading Time Estimation
 
-## 🛠️ Tech Stack
+Estimates how long the original article would take to read based on word count.
 
-| Component  | Technology               |
-|------------|---------------------------|
-| Framework  | Streamlit                |
-| NLP Model  | DistilBART (HuggingFace) |
-| Language   | Python                   |
-| Backend    | PyTorch                  |
+🔹 Copy or Download Summary
 
----
+View summary in a clean text block
 
-## 📁 Project Structure
-```
+Download summary as a .txt file
+
+Easy copy via Streamlit UI
+
+🔹 Optimized Performance
+
+Automatic CPU/GPU detection
+
+Model loaded once using Streamlit caching
+
+Inference optimized with torch.no_grad()
+
+🛠️ Tech Stack
+Component	Technology
+Framework	Streamlit
+NLP Model	DistilBART (Hugging Face)
+Language	Python
+Backend	PyTorch
+Utility	langdetect
+📁 Project Structure
 NewsSummarizerApp/
 ├── news_summarizer_app.py
 ├── requirements.txt
 └── .gitignore
 
-```
----
-
-## 📦 Installation & Setup
-
-### 1️⃣ Clone the repository
-```bash
+📦 Installation & Setup
+1️⃣ Clone the repository
 git clone https://github.com/kraryan1946/news-summarizer.git
 cd news-summarizer
+
+2️⃣ Create and activate virtual environment
 python -m venv .venv
 .venv\Scripts\activate       # Windows
 source .venv/bin/activate    # macOS/Linux
+
+3️⃣ Install dependencies
 pip install -r requirements.txt
+
+4️⃣ Run the app
 streamlit run news_summarizer_app.py
-```
----
-## 🧠 Model Information
 
-- Using DistilBART CNN-12-6:
+🧠 Model Information
 
-- Fast distilled version of BART
+DistilBART CNN-12-6
 
-- High-quality abstractive summarization
+Distilled version of BART
 
-- Ideal for news articles
+Faster inference with minimal quality loss
 
-Model page:
+Designed for news summarization tasks
+
+🔗 Model page:
 https://huggingface.co/sshleifer/distilbart-cnn-12-6
 
----
-## 🖼️ How It Works
+🖼️ How It Works
 
-- Paste a news article
+Paste a news article
 
-- Select summary length
+App detects input language
 
-- Click Generate Summary
+Select summary length
 
-- Copy or download the summary
----
-## ✨ Future Improvements
+Click Generate Summary
 
-Add URL/PDF input
+Copy or download the result
+
+✨ Future Improvements
+
+URL and PDF-based article input
 
 Bullet-point summaries
 
-Dark mode
+Dark mode support
 
-Deployment to Streamlit Cloud or HuggingFace Spaces
+Auto-translation for non-English input
 
----
-## 👤 Author
+Deployment to Streamlit Cloud / Hugging Face Spaces
 
-Kraryan
+👤 Author
+
+Kumar Aryan
 GitHub: https://github.com/witharyank
-
-## ⭐ Support the Project
-
-If you find this project useful, please star the repo — it helps others discover it!
