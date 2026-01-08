@@ -5,6 +5,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from langdetect import detect, LangDetectException
 
+
 # -------------------- PAGE CONFIG --------------------
 st.set_page_config(
     page_title="News Summarizer",
