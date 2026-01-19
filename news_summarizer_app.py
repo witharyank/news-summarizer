@@ -29,7 +29,7 @@ tokenizer, model = load_model()
 
 # -------------------- UI --------------------
 st.title("📰 News Article Summarizer")
-st.write("Paste a news article below and get an instant summary.")
+st.write("Paste a news article below to get an instant summary.")
 st.caption(f"⚙️ Running on **{DEVICE.upper()}**")
 
 # -------------------- SUMMARY LENGTH --------------------
