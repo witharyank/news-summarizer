@@ -59,10 +59,12 @@ Backend	PyTorch
 Utility	langdetect
 
 # 📁 Project Structure
+```
 NewsSummarizerApp/
 ├── news_summarizer_app.py
 ├── requirements.txt
 └── .gitignore
+```
 
 # 📦 Installation & Setup
 1️⃣ Clone the repository
@@ -91,7 +93,7 @@ Designed for news summarization tasks
 https://huggingface.co/sshleifer/distilbart-cnn-12-6
 
 # 🖼️ How It Works
-🔹Paste a news article
+🔹Paste a news article or URL
 🔹App detects input language
 🔹Select summary length
 🔹Click Generate Summary
