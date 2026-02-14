@@ -106,7 +106,7 @@ https://huggingface.co/sshleifer/distilbart-cnn-12-6
 🔹Auto-translation for non-English input
 🔹Deployment to Streamlit Cloud / Hugging Face Spaces
 
-# 👤 Author
+#  Author
 
 Kumar Aryan
 GitHub: https://github.com/witharyank
