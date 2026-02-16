@@ -75,7 +75,7 @@ length_map = {
 st.divider()
 
 # -------------------- URL INPUT --------------------
-url = st.text_input("🌐 Paste a news article URL (optional):")
+url = st.text_input("🌐 Paste a news article URL :")
 
 article = ""
 
