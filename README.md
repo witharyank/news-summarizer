@@ -3,7 +3,7 @@
 A lightweight and efficient AI-powered web application built with Streamlit that automatically summarizes long news articles.
 Powered by the DistilBART CNN model from Hugging Face, the app lets you paste any article, choose summary length, and instantly generate a concise summary — with automatic input language validation.
 
-
+you can try at: https://news-summarizer-7g8fnozeszmvp49iscdm7w.streamlit.app/
 
 # 🚀 Features
 🔹 AI Text Summarization
