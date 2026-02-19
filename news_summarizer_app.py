@@ -105,7 +105,7 @@ if manual_article.strip():
 # -------------------- TEXT ANALYTICS --------------------
 if article.strip():
     word_count = len(article.split())
-    reading_time = round(word_count / 200)
+    reading_time = max(1, round(word_count / 200))
 
     col1, col2 = st.columns(2)
     col1.metric("📝 Word Count", word_count)
