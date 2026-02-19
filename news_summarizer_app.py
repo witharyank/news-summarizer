@@ -4,7 +4,9 @@ import streamlit as st
 import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from langdetect import detect, LangDetectException
-from newspaper import Article
+import requests
+from bs4 import BeautifulSoup
+
 
 # -------------------- PAGE CONFIG --------------------
 st.set_page_config(
@@ -81,14 +83,17 @@ article = ""
 if url:
     try:
         with st.spinner("Fetching article from URL..."):
-            news_article = Article(url)
-            news_article.download()
-            news_article.parse()
-            article = news_article.text
+            response = requests.get(url, timeout=10)
+            soup = BeautifulSoup(response.text, "html.parser")
+
+            paragraphs = soup.find_all("p")
+            article = " ".join([p.get_text() for p in paragraphs])
+
             st.success("Article fetched successfully!")
-            st.caption(f"**Title:** {news_article.title}")
+
     except Exception:
         st.error("Failed to fetch article. Please check the URL.")
+
 
 # -------------------- MANUAL ARTICLE INPUT --------------------
 manual_article = st.text_area(

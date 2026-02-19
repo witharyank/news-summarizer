@@ -1,7 +1,6 @@
-streamlit==1.46.1
-torch>=2.7.0
-transformers>=4.40.0
+streamlit
+transformers
 langdetect
-newspaper3k
-lxml
+beautifulsoup4
+requests
 sentencepiece
