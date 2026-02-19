@@ -30,8 +30,7 @@ button {
 """, unsafe_allow_html=True)
 
 # -------------------- DEVICE --------------------
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
+DEVICE = "cpu"
 # -------------------- MODEL LOADING --------------------
 @st.cache_resource
 def load_model():
