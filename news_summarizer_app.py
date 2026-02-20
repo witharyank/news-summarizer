@@ -169,6 +169,8 @@ if st.session_state.summary:
     st.subheader("🧠 Generated Summary")
 
     st.write(st.session_state.summary)
+    summary_word_count = len(st.session_state.summary.split())
+    st.caption(f"Summary Word Count: {summary_word_count}")
 
     # Download option as txt format
     b64 = base64.b64encode(st.session_state.summary.encode()).decode()
