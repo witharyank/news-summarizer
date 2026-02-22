@@ -140,7 +140,7 @@ if generate:
 
                     inputs = tokenizer(
                         article,
-                        max_length=1024,
+                        max_length=512,
                         truncation=True,
                         return_tensors="pt"
                     ).to(DEVICE)
