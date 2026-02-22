@@ -135,6 +135,9 @@ if generate:
                 st.error("This summarizer currently works best with English text.")
             else:
                 with st.spinner("Generating summary... ⏳"):
+
+                    start_time = time.time()
+
                     inputs = tokenizer(
                         article,
                         max_length=1024,
@@ -157,6 +160,11 @@ if generate:
                         skip_special_tokens=True
                     )
 
+                    end_time = time.time()
+
+                    # ✅ STORE in session state
+                    st.session_state.generation_time = round(end_time - start_time, 2)
+
                 time.sleep(0.3)
 
         except LangDetectException:
@@ -169,6 +177,8 @@ if st.session_state.summary:
     st.subheader("🧠 Generated Summary")
 
     st.write(st.session_state.summary)
+    if "generation_time" in st.session_state:
+        st.caption(f"⏱ Generated in {st.session_state.generation_time} seconds")
     summary_word_count = len(st.session_state.summary.split())
     st.caption(f"Word Count of Summary: {summary_word_count}")
 
