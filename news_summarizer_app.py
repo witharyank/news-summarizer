@@ -180,12 +180,12 @@ if st.session_state.summary:
     if "generation_time" in st.session_state:
         st.caption(f"⏱ Generated in {st.session_state.generation_time} seconds")
     summary_word_count = len(st.session_state.summary.split())
-    st.caption(f"Word Count of Summary: {summary_word_count}")
+    st.caption(f"Word Count : {summary_word_count}")
 
     # Download option as txt format
     b64 = base64.b64encode(st.session_state.summary.encode()).decode()
     st.markdown(
-        f'<a href="data:text/plain;base64,{b64}" download="summary.txt">📥 Download News Summary</a>',
+        f'<a href="data:text/plain;base64,{b64}" download="summary.txt">📥 Download Summary</a>',
         unsafe_allow_html=True
     )
 
