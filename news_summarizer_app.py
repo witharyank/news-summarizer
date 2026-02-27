@@ -182,7 +182,7 @@ if st.session_state.summary:
     summary_word_count = len(st.session_state.summary.split())
     st.caption(f"Word Count : {summary_word_count}")
 
-    # Download option as txt format
+    # Download option as txt formatttttt
     b64 = base64.b64encode(st.session_state.summary.encode()).decode()
     st.markdown(
         f'<a href="data:text/plain;base64,{b64}" download="summary.txt">📥 Download Summary</a>',
