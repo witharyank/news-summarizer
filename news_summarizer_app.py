@@ -8,54 +8,75 @@ import requests
 from bs4 import BeautifulSoup
 
 
-# -------------------- PAGE CONFIG --------------------
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
-    page_title="News Summarizer",
+    page_title="AI News Summarizer",
     page_icon="📰",
     layout="centered"
 )
 
-# -------------------- CUSTOM STYLING --------------------
+# ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
+
 textarea {
-    border-radius: 12px !important;
+    border-radius:12px !important;
 }
+
 button {
-    border-radius: 10px !important;
-    height: 3em !important;
+    border-radius:10px !important;
+    height:3em !important;
 }
-.block-container {
-    padding-top: 2rem;
+
+.summary-box{
+    background:#f5f7fb;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #e6e6e6;
+    font-size:16px;
+    line-height:1.6;
 }
+
+.block-container{
+    padding-top:2rem;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-# -------------------- DEVICE --------------------
+
+# ---------------- DEVICE ----------------
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-# -------------------- MODEL LOADING --------------------
+
+
+# ---------------- MODEL LOADING ----------------
 @st.cache_resource
 def load_model():
     model_name = "sshleifer/distilbart-cnn-12-6"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+
     model.to(DEVICE)
     model.eval()
+
     return tokenizer, model
+
 
 tokenizer, model = load_model()
 
-# -------------------- HEADER --------------------
+
+# ---------------- HEADER ----------------
 st.markdown("""
-<h1 style='text-align: center;'>📰 AI News Summarizer</h1>
-<p style='text-align: center; color: gray;'>
-Paste your news article or provide a URL to generate a clean AI-powered summary.
+<h1 style='text-align:center;'>📰 AI News Summarizer</h1>
+<p style='text-align:center;color:gray;font-size:18px'>
+Summarize long news articles instantly using AI
 </p>
 """, unsafe_allow_html=True)
 
 st.divider()
 
-# -------------------- SUMMARY CONTROLS --------------------
+
+# ---------------- CONTROLS ----------------
 col1, col2 = st.columns(2)
 
 with col1:
@@ -67,6 +88,7 @@ with col1:
 with col2:
     st.metric("⚙️ Running On", DEVICE.upper())
 
+
 length_map = {
     "Short": 60,
     "Medium": 120,
@@ -75,68 +97,112 @@ length_map = {
 
 st.divider()
 
-# -------------------- URL INPUT --------------------
-url = st.text_input("🌐 Paste a news article URL :")
+
+# ---------------- INPUT TABS ----------------
+tab1, tab2 = st.tabs(["🌐 From URL", "📄 Paste Article"])
 
 article = ""
 
-if url:
-    try:
-        with st.spinner("Fetching article from URL..."):
-            response = requests.get(url, timeout=10)
-            soup = BeautifulSoup(response.text, "html.parser")
+# -------- URL INPUT --------
+with tab1:
 
-            paragraphs = soup.find_all("p")
-            article = " ".join([p.get_text() for p in paragraphs])
+    url = st.text_input("Paste news article URL")
+
+    if url:
+        try:
+
+            with st.spinner("Fetching article..."):
+
+                response = requests.get(url, timeout=10)
+                soup = BeautifulSoup(response.text, "html.parser")
+
+                paragraphs = soup.find_all("p")
+                article = " ".join([p.get_text() for p in paragraphs])
 
             st.success("Article fetched successfully!")
 
-    except Exception:
-        st.error("Failed to fetch article. Please check the URL.")
+        except Exception:
+            st.error("Failed to fetch article. Check URL.")
 
 
-# -------------------- MANUAL ARTICLE INPUT --------------------
-manual_article = st.text_area(
-    "📄 Or paste your news article here:",
-    height=350,
-    placeholder="Paste full news article text here..."
-)
+# -------- MANUAL INPUT --------
+with tab2:
 
-# If manual text exists, override URL content
-if manual_article.strip():
-    article = manual_article
+    manual_article = st.text_area(
+        "Paste full news article",
+        height=350,
+        placeholder="Paste article text..."
+    )
 
-# -------------------- TEXT ANALYTICS --------------------
+    if manual_article.strip():
+        article = manual_article
+
+
+# -------- EXAMPLE ARTICLE --------
+if st.button("📰 Load Example Article"):
+
+    article = """
+Artificial Intelligence is rapidly transforming industries worldwide.
+Companies are investing heavily in machine learning technologies to automate
+processes and gain deeper insights from data.
+
+Experts believe AI will revolutionize healthcare, finance, transportation,
+and many other sectors over the next decade.
+
+However, concerns remain about job displacement, ethical AI usage,
+and the need for strong governance frameworks.
+"""
+
+
+# ---------------- ARTICLE ANALYTICS ----------------
 if article.strip():
+
     word_count = len(article.split())
     reading_time = max(1, round(word_count / 200))
 
     col1, col2 = st.columns(2)
+
     col1.metric("📝 Word Count", word_count)
     col2.metric("🕒 Reading Time (mins)", reading_time)
 
 st.divider()
 
-# -------------------- SESSION STATE --------------------
+
+# ---------------- SESSION STATE ----------------
 if "summary" not in st.session_state:
     st.session_state.summary = ""
 
-# -------------------- GENERATE BUTTON --------------------
+
+# ---------------- GENERATE BUTTON ----------------
 generate = st.button("🚀 Generate Summary", use_container_width=True)
 
-# -------------------- GENERATION LOGIC --------------------
+
+# ---------------- GENERATION ----------------
 if generate:
+
     if not article.strip():
-        st.warning("Please provide a news article or URL first.")
+        st.warning("Please provide a news article first.")
+
     else:
+
         try:
+
             detected_language = detect(article)
+
             if detected_language != "en":
                 st.error("This summarizer currently works best with English text.")
+
             else:
-                with st.spinner("Generating summary... ⏳"):
+
+                progress = st.progress(0)
+
+                with st.spinner("Generating summary..."):
 
                     start_time = time.time()
+
+                    for i in range(100):
+                        time.sleep(0.005)
+                        progress.progress(i + 1)
 
                     inputs = tokenizer(
                         article,
@@ -146,6 +212,7 @@ if generate:
                     ).to(DEVICE)
 
                     with torch.no_grad():
+
                         summary_ids = model.generate(
                             inputs["input_ids"],
                             max_length=length_map[summary_length],
@@ -162,28 +229,42 @@ if generate:
 
                     end_time = time.time()
 
-                    # ✅ STORE in session state
                     st.session_state.generation_time = round(end_time - start_time, 2)
 
-                time.sleep(0.3)
-
         except LangDetectException:
-            st.error("Unable to detect language. Please check your input.")
+            st.error("Language detection failed.")
 
-# -------------------- OUTPUT SECTION --------------------
+
+# ---------------- OUTPUT ----------------
 if st.session_state.summary:
 
     st.divider()
     st.subheader("🧠 Generated Summary")
 
-    st.write(st.session_state.summary)
-    if "generation_time" in st.session_state:
-        st.caption(f"⏱ Generated in {st.session_state.generation_time} seconds")
-    summary_word_count = len(st.session_state.summary.split())
-    st.caption(f"Word Count : {summary_word_count}")
+    st.markdown(
+        f"<div class='summary-box'>{st.session_state.summary}</div>",
+        unsafe_allow_html=True
+    )
 
-    # Download option as txt formatttttt
+    summary_word_count = len(st.session_state.summary.split())
+
+    col1, col2, col3 = st.columns(3)
+
+    if "generation_time" in st.session_state:
+        col1.metric("⏱ Time", f"{st.session_state.generation_time}s")
+
+    col2.metric("📄 Summary Words", summary_word_count)
+
+    if article:
+        compression = round((1 - summary_word_count / word_count) * 100)
+        col3.metric("📉 Compression", f"{compression}%")
+
+    # -------- COPY FRIENDLY OUTPUT --------
+    st.code(st.session_state.summary, language="text")
+
+    # -------- DOWNLOAD --------
     b64 = base64.b64encode(st.session_state.summary.encode()).decode()
+
     st.markdown(
         f'<a href="data:text/plain;base64,{b64}" download="summary.txt">📥 Download Summary</a>',
         unsafe_allow_html=True
@@ -191,3 +272,10 @@ if st.session_state.summary:
 
     if st.button("🗑 Clear Summary"):
         st.session_state.summary = ""
+
+
+# ---------------- FOOTER ----------------
+st.divider()
+
+st.caption("Model: DistilBART CNN | HuggingFace Transformers")
+st.caption("Built with ❤️ using Streamlit")
