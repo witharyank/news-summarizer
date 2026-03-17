@@ -278,4 +278,4 @@ if st.session_state.summary:
 st.divider()
 
 st.caption("Model: DistilBART CNN | HuggingFace Transformers")
-st.caption("Built with ❤️ using Streamlit")
+st.caption("Contact Us For Suggestion: kraryan2028@gmail.com")
