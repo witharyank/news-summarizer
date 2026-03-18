@@ -279,3 +279,4 @@ st.divider()
 
 st.caption("Model: DistilBART CNN | HuggingFace Transformers")
 st.caption("Contact For Suggestion: kraryan2028@gmail.com")
+st.markdown("[🔗 View Source Code](https://github.com/witharyank/news-summarizer)")
