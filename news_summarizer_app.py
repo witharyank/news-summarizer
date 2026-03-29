@@ -274,7 +274,7 @@ if st.session_state.summary:
         st.session_state.summary = ""
 
 
-# ---------------- FOOTER ----------------
+# ---------------- FOOTER ----------------_--
 st.divider()
 
 st.caption("Model: DistilBART CNN | HuggingFace Transformers")
