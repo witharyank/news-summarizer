@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-# ---------------- CONFIG ----------------
+# ---------------- CONFIG --------------------
 st.set_page_config(
     page_title="AI News Summarizer",
     page_icon="📰",
@@ -14,7 +14,7 @@ st.set_page_config(
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-# ---------------- MODEL LOADING ----------------
+# ---------------- MODEL LOADING --------------------
 @st.cache_resource
 def load_model():
     model_name = "sshleifer/distilbart-cnn-12-6"
