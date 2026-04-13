@@ -186,4 +186,4 @@ if "summary" in st.session_state:
 # ---------------- FOOTER ----------------
 st.divider()
 st.caption("Model: DistilBART (HuggingFace)")
-st.caption("Built with ❤️ using Streamlit")
+st.caption("Contact us in case of any issue : kraryan2028@gmail")
