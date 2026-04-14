@@ -185,5 +185,12 @@ if "summary" in st.session_state:
 
 # ---------------- FOOTER ----------------
 st.divider()
-st.caption("Model: DistilBART (HuggingFace)")
-st.caption("Contact us in case of any issue : kraryan2028@gmail")
+
+st.markdown("""
+<div style='text-align:center; color:gray; font-size:14px;'>
+    <p><b>📰 AI News Summarizer</b></p>
+    <p>Powered by DistilBART (HuggingFace Transformers)</p>
+    <p>Developed by Kumar Aryan</p>
+    <p>📧 Contact: <a href="mailto:kraryan2028@gmail.com">kraryan2028@gmail.com</a></p>
+</div>
+""", unsafe_allow_html=True)
