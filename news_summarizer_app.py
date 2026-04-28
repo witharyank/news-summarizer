@@ -184,13 +184,36 @@ if "summary" in st.session_state:
         st.session_state.clear()
 
 # ---------------- FOOTER ----------------
+# ---------------- FOOTER ----------------
 st.divider()
 
 st.markdown("""
-<div style='text-align:center; color:gray; font-size:14px;'>
-    <p><b>📰 AI News Summarizer</b></p>
-    <p>Powered by DistilBART (HuggingFace Transformers)</p>
-    <p>Developed by Kumar Aryan</p>
-    <p>📧 Contact: <a href="mailto:kraryan2028@gmail.com">kraryan2028@gmail.com</a></p>
+<div style='text-align:center; padding:20px; border-radius:12px; 
+background:linear-gradient(135deg, #1e1e2f, #2b2b45); 
+color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); margin-top:20px;'>
+
+    <h3 style='margin-bottom:10px;'>📰 AI News Summarizer</h3>
+
+    <p style='font-size:15px; margin:5px 0; color:#dcdcdc;'>
+        Powered by <b>DistilBART</b> | HuggingFace Transformers
+    </p>
+
+    <p style='font-size:15px; margin:5px 0; color:#dcdcdc;'>
+        Developed with ❤️ by <b>Kumar Aryan</b>
+    </p>
+
+    <p style='font-size:15px; margin-top:10px;'>
+        📧 <a href="mailto:kraryan2028@gmail.com" 
+        style='color:#4da6ff; text-decoration:none;'>
+        kraryan2028@gmail.com
+        </a>
+    </p>
+
+    <hr style='border:0.5px solid #444; margin:15px 0;'>
+
+    <p style='font-size:13px; color:gray;'>
+        © 2026 All Rights Reserved
+    </p>
+
 </div>
 """, unsafe_allow_html=True)
