@@ -5,34 +5,125 @@ import requests
 from bs4 import BeautifulSoup
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-# ---------------- CONFIG --------------------
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="AI News Summarizer",
     page_icon="📰",
-    layout="centered"
+    layout="wide"
 )
 
+# ---------------- CUSTOM CSS ----------------
+st.markdown("""
+<style>
+
+.main {
+    background-color: #0f172a;
+    color: white;
+}
+
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 1100px;
+}
+
+h1, h2, h3 {
+    color: white;
+}
+
+.stTextInput input,
+.stTextArea textarea {
+    border-radius: 12px !important;
+    border: 1px solid #334155 !important;
+    background-color: #111827 !important;
+    color: white !important;
+}
+
+.stSelectbox div[data-baseweb="select"] {
+    border-radius: 12px !important;
+}
+
+.stButton button {
+    width: 100%;
+    border-radius: 12px;
+    height: 3rem;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    color: white;
+    border: none;
+}
+
+.stDownloadButton button {
+    width: 100%;
+    border-radius: 12px;
+    height: 3rem;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.metric-card {
+    background: #111827;
+    padding: 18px;
+    border-radius: 16px;
+    border: 1px solid #1e293b;
+    text-align: center;
+}
+
+.summary-box {
+    background: #111827;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #1e293b;
+    margin-top: 10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+    border-top: 1px solid #1e293b;
+    color: #94a3b8;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------- DEVICE ----------------
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-# ---------------- MODEL LOADING --------------------
+# ---------------- MODEL ----------------
 @st.cache_resource
 def load_model():
     model_name = "sshleifer/distilbart-cnn-12-6"
+
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForSeq2SeqLM.from_pretrained(model_name).to(DEVICE)
+
     model.eval()
+
     return tokenizer, model
+
 
 tokenizer, model = load_model()
 
-# ---------------- FETCH ARTICLE --------------------
+# ---------------- FETCH ARTICLE ----------------
 @st.cache_data
 def fetch_article(url: str) -> str:
-    headers = {"User-Agent": "Mozilla/5.0"}
+
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
 
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(
+            url,
+            headers=headers,
+            timeout=10
+        )
+
         response.raise_for_status()
+
     except requests.exceptions.RequestException:
         return ""
 
@@ -46,16 +137,19 @@ def fetch_article(url: str) -> str:
 
     return " ".join(paragraphs)
 
-# ---------------- TEXT PROCESSING --------------------
+# ---------------- TEXT SPLIT ----------------
 def split_text(text: str, max_words: int = 600):
+
     words = text.split()
+
     return [
         " ".join(words[i:i + max_words])
         for i in range(0, len(words), max_words)
     ]
 
-# ---------------- SUMMARIZATION --------------------
+# ---------------- SUMMARIZATION ----------------
 def summarize_chunk(text: str, max_len: int):
+
     inputs = tokenizer(
         text,
         return_tensors="pt",
@@ -64,7 +158,11 @@ def summarize_chunk(text: str, max_len: int):
     ).to(DEVICE)
 
     with torch.no_grad():
-        with torch.cuda.amp.autocast(enabled=(DEVICE == "cuda")):
+
+        with torch.cuda.amp.autocast(
+            enabled=(DEVICE == "cuda")
+        ):
+
             summary_ids = model.generate(
                 inputs["input_ids"],
                 max_length=max_len,
@@ -74,140 +172,264 @@ def summarize_chunk(text: str, max_len: int):
                 early_stopping=True
             )
 
-    return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    return tokenizer.decode(
+        summary_ids[0],
+        skip_special_tokens=True
+    )
 
 def summarize_article(article: str, max_len: int):
+
     chunks = split_text(article)
+
     summaries = []
 
     progress = st.progress(0)
 
     for i, chunk in enumerate(chunks):
-        summaries.append(summarize_chunk(chunk, max_len))
-        progress.progress((i + 1) / len(chunks))
+
+        summaries.append(
+            summarize_chunk(chunk, max_len)
+        )
+
+        progress.progress(
+            (i + 1) / len(chunks)
+        )
 
     progress.empty()
+
     return " ".join(summaries)
 
-# ---------------- METRICS --------------------
+# ---------------- METRICS ----------------
 def calculate_metrics(article: str, summary: str):
+
     word_count = len(article.split())
+
     summary_words = len(summary.split())
-    reading_time = max(1, round(word_count / 200))
-    compression = round((1 - summary_words / word_count) * 100)
 
-    return word_count, summary_words, reading_time, compression
+    reading_time = max(
+        1,
+        round(word_count / 200)
+    )
 
-# ---------------- UI --------------------
-st.markdown("<h1 style='text-align:center;'>📰 AI News Summarizer</h1>", unsafe_allow_html=True)
-st.caption("Summarize long news articles instantly using AI")
+    compression = round(
+        (1 - summary_words / word_count) * 100
+    )
 
-st.divider()
+    return (
+        word_count,
+        summary_words,
+        reading_time,
+        compression
+    )
 
-# ---------------- INPUT --------------------
-input_method = st.radio("Choose Input Method", ["🌐 URL", "📄 Paste Text"])
+# ---------------- HERO SECTION ----------------
+st.markdown("""
+<h1 style='text-align:center; font-size:48px;'>
+📰 AI News Summarizer
+</h1>
+
+<p style='text-align:center; color:#94a3b8; font-size:18px;'>
+Summarize lengthy articles instantly using AI-powered NLP
+</p>
+""", unsafe_allow_html=True)
+
+st.write("")
+
+# ---------------- MAIN LAYOUT ----------------
+left, right = st.columns([2, 1])
 
 article = ""
 
-if input_method == "🌐 URL":
-    url = st.text_input("Enter Article URL")
+# ---------------- LEFT PANEL ----------------
+with left:
 
-    if url:
-        with st.spinner("Fetching article..."):
-            article = fetch_article(url)
+    st.subheader("📥 Input")
 
-        if article:
-            st.success("Article fetched successfully!")
-        else:
-            st.error("Failed to fetch clean article content.")
+    input_method = st.radio(
+        "Choose Input Method",
+        ["🌐 URL", "📄 Paste Text"],
+        horizontal=True
+    )
 
-else:
-    article = st.text_area("Paste article text", height=300)
+    if input_method == "🌐 URL":
 
-# ---------------- SETTINGS --------------------
-length_option = st.selectbox("Summary Length", ["Short", "Medium", "Long"])
+        url = st.text_input(
+            "Article URL"
+        )
 
-length_map = {
-    "Short": 60,
-    "Medium": 120,
-    "Long": 200
-}
+        if url:
 
-st.divider()
+            with st.spinner(
+                "Fetching article..."
+            ):
 
-# ---------------- ANALYTICS --------------------
-if article.strip():
-    word_count = len(article.split())
-    reading_time = max(1, round(word_count / 200))
+                article = fetch_article(url)
 
-    col1, col2 = st.columns(2)
-    col1.metric("📝 Words", word_count)
-    col2.metric("⏱ Reading Time", f"{reading_time} min")
+            if article:
+                st.success(
+                    "Article fetched successfully!"
+                )
+            else:
+                st.error(
+                    "Unable to fetch article."
+                )
 
-# ---------------- SUMMARIZE --------------------
-if st.button("🚀 Generate Summary", use_container_width=True, disabled=not article.strip()):
+    else:
 
-    with st.spinner("Generating summary..."):
+        article = st.text_area(
+            "Paste Article",
+            height=350,
+            placeholder="Paste your article text here..."
+        )
+
+# ---------------- RIGHT PANEL ----------------
+with right:
+
+    st.subheader("⚙ Settings")
+
+    length_option = st.selectbox(
+        "Summary Length",
+        ["Short", "Medium", "Long"]
+    )
+
+    length_map = {
+        "Short": 60,
+        "Medium": 120,
+        "Long": 200
+    }
+
+    if article.strip():
+
+        wc = len(article.split())
+
+        rt = max(
+            1,
+            round(wc / 200)
+        )
+
+        st.markdown(f"""
+        <div class="metric-card">
+            <h2>{wc}</h2>
+            <p>Total Words</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.write("")
+
+        st.markdown(f"""
+        <div class="metric-card">
+            <h2>{rt} min</h2>
+            <p>Reading Time</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+# ---------------- GENERATE BUTTON ----------------
+st.write("")
+
+if st.button(
+    "🚀 Generate Summary",
+    disabled=not article.strip()
+):
+
+    with st.spinner(
+        "Generating AI Summary..."
+    ):
+
         start = time.time()
-        summary = summarize_article(article, length_map[length_option])
+
+        summary = summarize_article(
+            article,
+            length_map[length_option]
+        )
+
         end = time.time()
 
     st.session_state.summary = summary
-    st.session_state.time = round(end - start, 2)
-
-# ---------------- OUTPUT --------------------
-if "summary" in st.session_state:
-
-    st.divider()
-    st.subheader("🧠 Summary")
-
-    st.text_area("📄 Summary Output", st.session_state.summary, height=250)
-
-    wc, sw, rt, comp = calculate_metrics(article, st.session_state.summary)
-
-    col1, col2, col3 = st.columns(3)
-    col1.metric("⏱ Time", f"{st.session_state.time}s")
-    col2.metric("📄 Summary Words", sw)
-    col3.metric("📉 Compression", f"{comp}%")
-
-    st.download_button(
-        "📥 Download Summary",
-        st.session_state.summary,
-        file_name="summary.txt"
+    st.session_state.time = round(
+        end - start,
+        2
     )
 
-    if st.button("🗑 Clear"):
-        st.session_state.clear()
-        st.rerun()
+# ---------------- OUTPUT ----------------
+if "summary" in st.session_state:
 
-# ---------------- FOOTER --------------------
-st.divider()
+    st.write("")
+    st.subheader("🧠 Generated Summary")
 
+    st.markdown(f"""
+    <div class="summary-box">
+        {st.session_state.summary}
+    </div>
+    """, unsafe_allow_html=True)
+
+    wc, sw, rt, comp = calculate_metrics(
+        article,
+        st.session_state.summary
+    )
+
+    st.write("")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "⏱ Time",
+            f"{st.session_state.time}s"
+        )
+
+    with col2:
+        st.metric(
+            "📄 Summary Words",
+            sw
+        )
+
+    with col3:
+        st.metric(
+            "📉 Compression",
+            f"{comp}%"
+        )
+
+    st.write("")
+
+    d1, d2 = st.columns(2)
+
+    with d1:
+
+        st.download_button(
+            "📥 Download Summary",
+            st.session_state.summary,
+            file_name="summary.txt",
+            use_container_width=True
+        )
+
+    with d2:
+
+        if st.button(
+            "🗑 Clear Session"
+        ):
+
+            st.session_state.clear()
+            st.rerun()
+
+# ---------------- FOOTER ----------------
 st.markdown("""
-<div style='text-align:center; padding:20px; border-radius:12px; 
-background:linear-gradient(135deg, #1e1e2f, #2b2b45); 
-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); margin-top:20px;'>
+<div class="footer">
 
     <h3>📰 AI News Summarizer</h3>
 
-    <p style='color:#dcdcdc;'>
-        Powered by <b>DistilBART</b> | HuggingFace Transformers
-    </p>
-
-    <p style='color:#dcdcdc;'>
-        Developed by <b>Kumar Aryan</b>
+    <p>
+        Powered by DistilBART + HuggingFace Transformers
     </p>
 
     <p>
-        📧 <a href="mailto:kraryan2028@gmail.com" 
-        style='color:#4da6ff; text-decoration:none;'>
-        kraryan2028@gmail.com
-        </a>
+        Developed by Kumar Aryan
     </p>
 
-    <hr style='border:0.5px solid #444;'>
+    <p>
+        📧 kraryan2028@gmail.com
+    </p>
 
-    <p style='font-size:13px; color:gray;'>
+    <p style="font-size:13px;">
         © 2026 All Rights Reserved
     </p>
 
