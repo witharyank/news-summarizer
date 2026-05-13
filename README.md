@@ -163,24 +163,41 @@ NewsSummarizerApp/
 ├── .gitignore
 └── README.md
 ```
-# Installation & Setup
-1. Clone the Repository
+## Installation & Setup
+
+1. **Clone the Repository**
+```bash
 git clone https://github.com/witharyank/news-summarizer.git
 cd news-summarizer
-2. Create Virtual Environment
+```
 
-# Windows:
+2. **Create Virtual Environment**
+
+**Windows:**
+```bash
 python -m venv .venv
 .venv\Scripts\activate
+```
 
-macOS/Linux:
+**macOS/Linux:**
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-3. Install Dependencies
+```
+
+3. **Install Dependencies**
+```bash
 pip install -r requirements.txt
-4. Run the Application
+```
+
+4. **Run the Application**
+```bash
 streamlit run news_summarizer_app.py
-Application Workflow
+```
+
+## Application Workflow
+
+```text
 User Input
    ↓
 Article Extraction
@@ -194,68 +211,78 @@ DistilBART Summarization
 Summary Generation
    ↓
 Analytics + Download
-Performance Optimizations
+```
+
+## Performance Optimizations
 
 The application includes several optimizations:
 
-Cached model loading
-Automatic CUDA detection
-Mixed precision inference
-Chunk-based summarization
-Efficient memory handling
-Streamlit session state management
-Key Functionalities
-Feature	Status
-URL Extraction	Yes
-Text Summarization	Yes
-Adjustable Summary Length	Yes
-Reading Metrics	Yes
-Download Summary	Yes
-GPU Support	Yes
-Streamlit Deployment	Yes
-Future Improvements
+- Cached model loading
+- Automatic CUDA detection
+- Mixed precision inference
+- Chunk-based summarization
+- Efficient memory handling
+- Streamlit session state management
+
+## Key Functionalities
+
+| Feature | Status |
+|---|---|
+| URL Extraction | Yes |
+| Text Summarization | Yes |
+| Adjustable Summary Length | Yes |
+| Reading Metrics | Yes |
+| Download Summary | Yes |
+| GPU Support | Yes |
+| Streamlit Deployment | Yes |
+
+## Future Improvements
 
 Planned features:
 
-Multi-language summarization
-PDF support
-Bullet-point summaries
-Light/Dark theme toggle
-Advanced transformer models
-Docker deployment
-Mobile optimization
-Text-to-speech summaries
-Summary quality scoring
-Example Use Cases
-News article summarization
-Research paper overview
-Blog summarization
-Corporate news digest
-Student study assistance
-Quick content understanding
-Author
+- Multi-language summarization
+- PDF support
+- Bullet-point summaries
+- Light/Dark theme toggle
+- Advanced transformer models
+- Docker deployment
+- Mobile optimization
+- Text-to-speech summaries
+- Summary quality scoring
 
-Kumar Aryan
+## Example Use Cases
+
+- News article summarization
+- Research paper overview
+- Blog summarization
+- Corporate news digest
+- Student study assistance
+- Quick content understanding
+
+## Author
+
+**Kumar Aryan**
 
 Computer Science Undergraduate interested in:
 
-Artificial Intelligence
-NLP Applications
-Cloud Computing
-Full Stack Development
+- Artificial Intelligence
+- NLP Applications
+- Cloud Computing
+- Full Stack Development
 
 GitHub:
 https://github.com/witharyank
 
-Support the Project
+## Support the Project
 
 If you like this project:
 
-Star the repository
-Fork the project
-Contribute improvements
-Share with others
-License
+- Star the repository
+- Fork the project
+- Contribute improvements
+- Share with others
+
+## License
 
 This project is open-source and available under the MIT License.
 
