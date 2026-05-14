@@ -1,244 +1,103 @@
-# AI News Summarizer
+# 📰 AI News Summarizer
 
-A modern AI-powered web application that automatically summarizes long news articles using Hugging Face Transformers and Streamlit.
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B.svg?style=flat&logo=Streamlit&logoColor=white)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-F9AB00.svg?style=flat&logo=huggingface&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-Live Demo:
-https://news-summarizer-7g8fnozeszmvp49iscdm7w.streamlit.app/
+A modern, AI-powered web application that automatically summarizes long news articles using Hugging Face Transformers and Streamlit. Built with performance optimization and simplicity in mind, the app uses efficient chunk processing and optimized PyTorch inference for fast, real-time summarization.
 
-GitHub Repository:
-https://github.com/witharyank/news-summarizer
-
----
-
-## Overview
-
-AI News Summarizer is a lightweight and efficient NLP application designed to convert lengthy news articles into concise and meaningful summaries using the pretrained DistilBART transformer model.
-
-The application supports:
-- URL-based article extraction
-- Direct text summarization
-- Adjustable summary lengths
-- Reading analytics
-- Downloadable summaries
-- GPU acceleration support
-- Modern responsive UI
-
-Built with performance optimization and simplicity in mind, the app uses Streamlit caching, efficient chunk processing, and optimized PyTorch inference for fast real-time summarization.
+🔗 **[Live Demo](https://news-summarizer-7g8fnozeszmvp49iscdm7w.streamlit.app/)** | 🐙 **[GitHub Repository](https://github.com/witharyank/news-summarizer)**
 
 ---
 
-## Features
+## ✨ Features
 
-### AI-Powered Summarization
-
-Uses the pretrained Hugging Face transformer model:
-
-sshleifer/distilbart-cnn-12-6
-
-Features:
-- High-quality abstractive summarization
-- Optimized for news articles
-- Faster inference
-- Lower memory usage
+- **🧠 AI-Powered Summarization:** Uses the pretrained `sshleifer/distilbart-cnn-12-6` model for high-quality abstractive summarization.
+- **🔗 URL-Based Extraction:** Paste any news article URL, and the app automatically fetches, cleans, and prepares the text.
+- **📝 Direct Text Summarization:** Instantly summarize pasted text from blogs, research papers, or documentation.
+- **⚙️ Customizable Summary Length:** Choose from Short, Medium, or Long summary styles.
+- **📊 Reading Analytics:** Automatically calculates word count, estimated reading time, and compression percentage.
+- **⚡ Optimized Performance:** Features Streamlit caching, GPU/CPU detection, and chunk-based processing for long articles.
+- **💾 Download Summary:** Easily copy or download generated summaries as `.txt` files.
+- **🎨 Modern UI:** Clean, responsive interface with dark theme styling.
 
 ---
 
-### URL-Based Article Extraction
-
-Paste any news article URL and the app automatically:
-- Fetches webpage content
-- Extracts meaningful paragraphs
-- Cleans unnecessary HTML
-- Prepares text for summarization
-
-Powered by:
-- requests
-- BeautifulSoup
-
----
-
-### Direct Text Summarization
-
-Users can directly paste article text into the application for instant summarization.
-
-Useful for:
-- News articles
-- Blogs
-- Research papers
-- Documentation
-- Reports
-
----
-
-### Customizable Summary Length
-
-Choose from multiple summary styles:
-
-| Mode   | Description |
-|--------|-------------|
-| Short  | Quick concise overview |
-| Medium | Balanced summary |
-| Long   | Detailed summarized version |
-
----
-
-### Reading Analytics
-
-Automatically calculates:
-- Total word count
-- Estimated reading time
-- Summary word count
-- Compression percentage
-
----
-
-### Optimized Performance
-
-Performance-focused implementation includes:
-- Streamlit caching
-- Automatic GPU/CPU detection
-- torch.no_grad() optimization
-- Chunk-based processing for long articles
-- Efficient transformer inference
-
----
-
-### Download Summary
-
-Generated summaries can be:
-- Copied easily
-- Downloaded as .txt files
-- Shared instantly
-
----
-
-### Modern UI
-
-Features a clean and responsive interface with:
-- Dark theme styling
-- Modern cards and layout
-- Responsive design
-- Streamlit-based interactive components
-
----
-
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Component | Technology |
 |---|---|
-| Frontend | Streamlit |
-| Language | Python |
-| NLP Framework | Hugging Face Transformers |
-| Backend | PyTorch |
-| Web Scraping | BeautifulSoup4 |
-| HTTP Requests | Requests |
-| Model | DistilBART CNN-12-6 |
+| **Frontend** | Streamlit |
+| **Language** | Python |
+| **NLP Framework** | Hugging Face Transformers |
+| **Backend** | PyTorch |
+| **Web Scraping** | BeautifulSoup4, Requests |
+| **Model** | DistilBART CNN-12-6 |
 
 ---
 
-## Model Information
-
-### DistilBART CNN-12-6
-
-A lightweight distilled version of Facebook BART optimized for summarization tasks.
-
-Advantages:
-- Faster inference
-- Lower memory usage
-- High summarization quality
-- Optimized for news summarization
-
-Model Page:
-https://huggingface.co/sshleifer/distilbart-cnn-12-6
-
----
-
-## Project Structure
-
-```bash
-NewsSummarizerApp/
-│
-├── news_summarizer_app.py
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-## Installation & Setup
+## 🚀 Installation & Setup
 
 1. **Clone the Repository**
-```bash
-git clone https://github.com/witharyank/news-summarizer.git
-cd news-summarizer
-```
+   ```bash
+   git clone https://github.com/witharyank/news-summarizer.git
+   cd news-summarizer
+   ```
 
-2. **Create Virtual Environment**
+2. **Create a Virtual Environment**
 
-**Windows:**
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
+   *Windows:*
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
 
-**macOS/Linux:**
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
+   *macOS/Linux:*
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
 
 3. **Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 4. **Run the Application**
-```bash
-streamlit run news_summarizer_app.py
+   ```bash
+   streamlit run news_summarizer_app.py
+   ```
+
+---
+
+## 🏗️ Application Workflow
+
+```mermaid
+graph TD
+    A[User Input: URL or Text] --> B[Article Extraction]
+    B --> C[Text Cleaning]
+    C --> D[Chunk Processing]
+    D --> E[DistilBART Summarization]
+    E --> F[Summary Generation]
+    F --> G[Analytics + Download Option]
 ```
 
-## Application Workflow
+---
 
-```text
-User Input
-   ↓
-Article Extraction
-   ↓
-Text Cleaning
-   ↓
-Chunk Processing
-   ↓
-DistilBART Summarization
-   ↓
-Summary Generation
-   ↓
-Analytics + Download
-```
+## 💡 Example Use Cases
 
-## Performance Optimizations
+- 🗞️ News article summarization
+- 📄 Research paper overviews
+- ✍️ Blog summarization
+- 🏢 Corporate news digests
+- 🎓 Student study assistance
+- ⏱️ Quick content understanding
 
-The application includes several optimizations:
+---
 
-- Cached model loading
-- Automatic CUDA detection
-- Mixed precision inference
-- Chunk-based summarization
-- Efficient memory handling
-- Streamlit session state management
-
-## Key Functionalities
-
-| Feature | Status |
-|---|---|
-| URL Extraction | Yes |
-| Text Summarization | Yes |
-| Adjustable Summary Length | Yes |
-| Reading Metrics | Yes |
-| Download Summary | Yes |
-| GPU Support | Yes |
-| Streamlit Deployment | Yes |
-
-## Future Improvements
-
-Planned features:
+## 🔮 Future Improvements
 
 - Multi-language summarization
 - PDF support
@@ -246,44 +105,31 @@ Planned features:
 - Light/Dark theme toggle
 - Advanced transformer models
 - Docker deployment
-- Mobile optimization
 - Text-to-speech summaries
 - Summary quality scoring
 
-## Example Use Cases
+---
 
-- News article summarization
-- Research paper overview
-- Blog summarization
-- Corporate news digest
-- Student study assistance
-- Quick content understanding
+## 👨‍💻 Author
 
-## Author
+**Kumar Aryan**  
+Computer Science Undergraduate interested in Artificial Intelligence, NLP Applications, Cloud Computing, and Full Stack Development.
 
-**Kumar Aryan**
+- 🐙 **GitHub:** [@witharyank](https://github.com/witharyank)
 
-Computer Science Undergraduate interested in:
+---
 
-- Artificial Intelligence
-- NLP Applications
-- Cloud Computing
-- Full Stack Development
+## 🤝 Support the Project
 
-GitHub:
-https://github.com/witharyank
+If you like this project, please consider:
+- ⭐ Starring the repository
+- 🍴 Forking the project
+- 🛠️ Contributing improvements
+- 📢 Sharing with others
 
-## Support the Project
+## 📝 License
 
-If you like this project:
+This project is open-source and available under the **MIT License**.
 
-- Star the repository
-- Fork the project
-- Contribute improvements
-- Share with others
-
-## License
-
-This project is open-source and available under the MIT License.
-
-Built using Python, Streamlit, Hugging Face Transformers, and PyTorch.
+---
+*Built with ❤️ using Python, Streamlit, Hugging Face Transformers, and PyTorch.*
