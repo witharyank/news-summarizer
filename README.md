@@ -15,13 +15,15 @@ A modern, AI-powered web application that automatically summarizes long news art
 ## ✨ Features
 
 - **🧠 AI-Powered Summarization:** Uses the pretrained `sshleifer/distilbart-cnn-12-6` model for high-quality abstractive summarization.
-- **🔗 URL-Based Extraction:** Paste any news article URL, and the app automatically fetches, cleans, and prepares the text.
+- **🔗 Intelligent URL Scraping:** Automatically fetches the article, extracts the core content (filtering out ads/boilerplates), and parses webpage title/domain metadata.
 - **📝 Direct Text Summarization:** Instantly summarize pasted text from blogs, research papers, or documentation.
-- **⚙️ Customizable Summary Length:** Choose from Short, Medium, or Long summary styles.
-- **📊 Reading Analytics:** Automatically calculates word count, estimated reading time, and compression percentage.
-- **⚡ Optimized Performance:** Features Streamlit caching, GPU/CPU detection, and chunk-based processing for long articles.
-- **💾 Download Summary:** Easily copy or download generated summaries as `.txt` files.
-- **🎨 Modern UI:** Clean, responsive interface with dark theme styling.
+- **⚙️ Configurable Settings:** Choose between Short, Medium, or Long summaries in **Paragraph** or **Bullet Points** format.
+- **🎭 Sentiment Analysis:** Enable optional sentiment tone classification powered by a cached DistilBERT model.
+- **🏷️ Topic Keywords:** Automatically extracts and displays top keywords as interactive styled badges.
+- **📜 Recent Summaries (History):** Sidebar panel remembers the last 5 summarized articles during the session.
+- **📊 Rich Analytics:** Custom progress bars showing compression ratios, time saved, word counts, and language check badges.
+- **💾 One-Click Export:** Easily download summaries as `.txt` files or copy them with a single click.
+- **🎨 Glassmorphic Dark UI:** Responsive interface with custom CSS styling, linear gradients, card layouts, and subtle transitions.
 
 ---
 
