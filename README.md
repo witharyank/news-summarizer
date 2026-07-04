@@ -40,7 +40,7 @@ A modern, AI-powered web application that automatically summarizes long news art
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 1. **Clone the Repository**
    ```bash
@@ -74,7 +74,7 @@ A modern, AI-powered web application that automatically summarizes long news art
 
 ---
 
-## 🏗️ Application Workflow
+## Application Workflow
 
 ```mermaid
 graph TD
@@ -88,7 +88,7 @@ graph TD
 
 ---
 
-## 💡 Example Use Cases
+## Example Use Cases
 
 - 🗞️ News article summarization
 - 📄 Research paper overviews
@@ -99,7 +99,7 @@ graph TD
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - Multi-language summarization
 - PDF support
@@ -112,7 +112,7 @@ graph TD
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Kumar Aryan**  
 Computer Science Undergraduate interested in Artificial Intelligence, NLP Applications, Cloud Computing, and Full Stack Development.
@@ -121,7 +121,7 @@ Computer Science Undergraduate interested in Artificial Intelligence, NLP Applic
 
 ---
 
-## 🤝 Support the Project
+## Support the Project
 
 If you like this project, please consider:
 - ⭐ Starring the repository
@@ -129,7 +129,7 @@ If you like this project, please consider:
 - 🛠️ Contributing improvements
 - 📢 Sharing with others
 
-## 📝 License
+## License
 
 This project is open-source and available under the **MIT License**.
 
