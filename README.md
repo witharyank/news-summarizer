@@ -12,7 +12,7 @@ A modern, AI-powered web application that automatically summarizes long news art
 
 ---
 
-## ✨ Features
+##  Features
 
 - **🧠 AI-Powered Summarization:** Uses the pretrained `sshleifer/distilbart-cnn-12-6` model for high-quality abstractive summarization.
 - **🔗 Intelligent URL Scraping:** Automatically fetches the article, extracts the core content (filtering out ads/boilerplates), and parses webpage title/domain metadata.
@@ -27,7 +27,7 @@ A modern, AI-powered web application that automatically summarizes long news art
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Component | Technology |
 |---|---|
