@@ -14,16 +14,16 @@ A modern, AI-powered web application that automatically summarizes long news art
 
 ##  Features
 
-- **🧠 AI-Powered Summarization:** Uses the pretrained `sshleifer/distilbart-cnn-12-6` model for high-quality abstractive summarization.
-- **🔗 Intelligent URL Scraping:** Automatically fetches the article, extracts the core content (filtering out ads/boilerplates), and parses webpage title/domain metadata.
-- **📝 Direct Text Summarization:** Instantly summarize pasted text from blogs, research papers, or documentation.
-- **⚙️ Configurable Settings:** Choose between Short, Medium, or Long summaries in **Paragraph** or **Bullet Points** format.
-- **🎭 Sentiment Analysis:** Enable optional sentiment tone classification powered by a cached DistilBERT model.
-- **🏷️ Topic Keywords:** Automatically extracts and displays top keywords as interactive styled badges.
-- **📜 Recent Summaries (History):** Sidebar panel remembers the last 5 summarized articles during the session.
-- **📊 Rich Analytics:** Custom progress bars showing compression ratios, time saved, word counts, and language check badges.
-- **💾 One-Click Export:** Easily download summaries as `.txt` files or copy them with a single click.
-- **🎨 Glassmorphic Dark UI:** Responsive interface with custom CSS styling, linear gradients, card layouts, and subtle transitions.
+- ** AI-Powered Summarization:** Uses the pretrained `sshleifer/distilbart-cnn-12-6` model for high-quality abstractive summarization.
+- ** Intelligent URL Scraping:** Automatically fetches the article, extracts the core content (filtering out ads/boilerplates), and parses webpage title/domain metadata.
+- ** Direct Text Summarization:** Instantly summarize pasted text from blogs, research papers, or documentation.
+- ** Configurable Settings:** Choose between Short, Medium, or Long summaries in **Paragraph** or **Bullet Points** format.
+- ** Sentiment Analysis:** Enable optional sentiment tone classification powered by a cached DistilBERT model.
+- ** Topic Keywords:** Automatically extracts and displays top keywords as interactive styled badges.
+- ** Recent Summaries (History):** Sidebar panel remembers the last 5 summarized articles during the session.
+- ** Rich Analytics:** Custom progress bars showing compression ratios, time saved, word counts, and language check badges.
+- ** One-Click Export:** Easily download summaries as `.txt` files or copy them with a single click.
+- ** Glassmorphic Dark UI:** Responsive interface with custom CSS styling, linear gradients, card layouts, and subtle transitions.
 
 ---
 
@@ -90,12 +90,12 @@ graph TD
 
 ## Example Use Cases
 
-- 🗞️ News article summarization
-- 📄 Research paper overviews
-- ✍️ Blog summarization
-- 🏢 Corporate news digests
-- 🎓 Student study assistance
-- ⏱️ Quick content understanding
+-  News article summarization
+-  Research paper overviews
+-  Blog summarization
+-  Corporate news digests
+-  Student study assistance
+-  Quick content understanding
 
 ---
 
@@ -117,17 +117,17 @@ graph TD
 **Kumar Aryan**  
 Computer Science Undergraduate interested in Artificial Intelligence, NLP Applications, Cloud Computing, and Full Stack Development.
 
-- 🐙 **GitHub:** [@witharyank](https://github.com/witharyank)
+-  **GitHub:** [@witharyank](https://github.com/witharyank)
 
 ---
 
 ## Support the Project
 
 If you like this project, please consider:
-- ⭐ Starring the repository
-- 🍴 Forking the project
-- 🛠️ Contributing improvements
-- 📢 Sharing with others
+-  Starring the repository
+-  Forking the project
+-  Contributing improvements
+-  Sharing with others
 
 ## License
 
