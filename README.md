@@ -8,7 +8,7 @@
 
 A modern, AI-powered web application that automatically summarizes long news articles using Hugging Face Transformers and Streamlit. Built with performance optimization and simplicity in mind, the app uses efficient chunk processing and optimized PyTorch inference for fast, real-time summarization.
 
-🔗 **[Live Demo](https://news-summarizer-7g8fnozeszmvp49iscdm7w.streamlit.app/)** | 🐙 **[GitHub Repository](https://github.com/witharyank/news-summarizer)**
+ **[Live Demo](https://news-summarizer-7g8fnozeszmvp49iscdm7w.streamlit.app/)** |  **[GitHub Repository](https://github.com/witharyank/news-summarizer)**
 
 ---
 
@@ -134,4 +134,5 @@ If you like this project, please consider:
 This project is open-source and available under the **MIT License**.
 
 ---
-*Built with ❤️ using Python, Streamlit, Hugging Face Transformers, and PyTorch.*
+*Built with  using Python, Streamlit, Hugging Face Transformers, and PyTorch.*
+Folk and star and contributeeee
