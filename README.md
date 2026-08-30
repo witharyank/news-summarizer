@@ -135,4 +135,10 @@ This project is open-source and available under the **MIT License**.
 
 ---
 *Built with  using Python, Streamlit, Hugging Face Transformers, and PyTorch.*
-Folk and star and contributeeee
+Thank you for taking the time to contribute! Every bug report, suggestion, documentation improvement, and pull request helps make this project better for everyone. We truly appreciate your time and effort.
+
+
+**Email:** [kraryan2028@gmail.com](mailto:kraryan2028@gmail.com)
+
+Happy Coding! 
+
